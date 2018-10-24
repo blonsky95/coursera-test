@@ -25,6 +25,7 @@ var menuItemHtml = "snippets/menu-item.html";
 
 // Convenience function for inserting innerHTML for 'select' - inserts html in selector target
 var insertHtml = function (selector, html) {
+  console.log(selector + " "+html);
   var targetElem = document.querySelector(selector);
   targetElem.innerHTML = html;
 };
@@ -40,8 +41,10 @@ var showLoading = function (selector) {
 // with propValue in given 'string' - substitutes propName by propValue - returns string with new value(?)
 var insertProperty = function (string, propName, propValue) {
   var propToReplace = "{{" + propName + "}}";
+  console.log("prop to replace " +propToReplace + " new prop "+propValue);
   string = string
     .replace(new RegExp(propToReplace, "g"), propValue);
+    console.log(" string "+string);
   return string;
 };
 
@@ -105,6 +108,7 @@ function buildAndShowHomeHTML (categories) {
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
        var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
+       console.log(chosenCategoryShortName);
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
       // chosen category from STEP 2. Use existing insertProperty function for that purpose.
@@ -117,7 +121,11 @@ function buildAndShowHomeHTML (categories) {
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
-       var homeHtmlToInsertIntoMainPage  =insertProperty(homeHtmlToInsertIntoMainPage,"randomCategoryShortName",chosenCategoryShortName);
+
+   
+
+       var homeHtmlToInsertIntoMainPage  =insertProperty(homeHtml,"randomCategoryShortName","'" + chosenCategoryShortName+ "'");
+       console.log(homeHtmlToInsertIntoMainPage);
 
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
